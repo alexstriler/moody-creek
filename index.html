@@ -228,6 +228,9 @@ section { padding-block: clamp(4rem, 11vw, 8.5rem); }
 .ing-list .n { font-family: var(--mono); font-size: .75rem; color: var(--verjus); letter-spacing: .1em; }
 .ing-list .t { font-family: var(--display); font-size: clamp(1.5rem, 4vw, 2.4rem); text-transform: uppercase; letter-spacing: .02em; }
 
+.cluster { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 55% 45%;
+  border-radius: 9px; box-shadow: var(--shadow); margin-top: .5rem; display: block; }
+
 .nots { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; padding: 0; list-style: none; }
 .nots li {
   font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase;
@@ -453,6 +456,7 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
       <p class="eyebrow">The ingredient list</p>
       <h2>We overthought<br>two things.</h2>
       <p class="narrow">Most drinks have a paragraph on the back. Ours has a sentence. Wine grapes give you enough flavor, color and acid on their own that you don't need to hand a chemist the rest of the job.</p>
+      <img class="cluster" src="media/vine-cluster.jpg" alt="Ripe grape clusters on the vine" loading="lazy" decoding="async">
     </div>
     <div class="reveal">
       <ul class="ing-list">
@@ -492,14 +496,9 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
   <div class="wrap stack">
     <p class="eyebrow reveal">The lineup &nbsp;·&nbsp; scroll →</p>
     <h2 class="reveal">Fourteen grapes.<br>Never the same<br>can twice.</h2>
-    <p class="narrow reveal">Wine grapes ripen for a few weeks and then they're gone until next year. So the lineup moves. Some of these exist for one fortnight in July and then not again for twelve months.</p>
   </div>
 
   <div class="rail reveal">
-    <figure class="can photo-card">
-      <img src="media/vine-cluster.jpg" alt="Ripe dark grape clusters hanging on the vine" loading="lazy" decoding="async">
-      <figcaption>This is the whole supply chain.<br>Fourteen varieties, one hillside.</figcaption>
-    </figure>
 
     <article class="can" style="--c1:#C9E04A; --c2:#1E2A0A">
       <img class="render" src="media/cans/01-sauvignon-blanc.jpg" alt="Sauvignon Blanc can" loading="lazy" decoding="async">
