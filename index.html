@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moody Creek — Grapes and Bubbles. That's It.</title>
+</head>
+<body>
+<!--ARTIFACT-->
+<style>
+/* ============================================================
+   MOODY CREEK — dark-first token system
+   Default :root = NIGHT. Light ("FOG") redefines tokens only.
+   ============================================================ */
+:root {
+  --bg:        #0C0712;
+  --surface:   #160D1F;
+  --surface-2: #20142C;
+  --line:      #372744;
+  --text:      #F1EAF5;
+  --muted:     #A695B2;
+  --verjus:    #C6F53C;
+  --verjus-in: #141C06;
+  --must:      #B571EC;
+  --shadow:    0 24px 60px -20px rgba(0,0,0,.8);
+  --grain:     .07;
+  --fog-op:    .30;
+
+  --display: "Haettenschweiler", "Impact", "Franklin Gothic Bold", "Arial Narrow Bold", "Arial Narrow", sans-serif;
+  --body: "Optima", "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
+  --mono: "Courier New", Courier, ui-monospace, monospace;
+
+  --measure: 64ch;
+  --pad: clamp(1.25rem, 5vw, 4rem);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg:        #EDE7F1;
+    --surface:   #F8F5FA;
+    --surface-2: #E2DAE8;
+    --line:      #D0C4D8;
+    --text:      #1E1328;
+    --muted:     #64556F;
+    --verjus:    #4A6605;
+    --verjus-in: #F6FFE2;
+    --must:      #7828B4;
+    --shadow:    0 20px 44px -22px rgba(38,20,52,.35);
+    --grain:     .03;
+    --fog-op:    .22;
+  }
+}
+:root[data-theme="light"] {
+  --bg:        #EDE7F1;
+  --surface:   #F8F5FA;
+  --surface-2: #E2DAE8;
+  --line:      #D0C4D8;
+  --text:      #1E1328;
+  --muted:     #64556F;
+  --verjus:    #4A6605;
+  --verjus-in: #F6FFE2;
+  --must:      #7828B4;
+  --shadow:    0 20px 44px -22px rgba(38,20,52,.35);
+  --grain:     .03;
+  --fog-op:    .22;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: clamp(1rem, .96rem + .22vw, 1.125rem);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ---------- shared primitives ---------- */
+.wrap { width: min(100% - calc(var(--pad) * 2), 1180px); margin-inline: auto; }
+.narrow { max-width: var(--measure); }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(2.4rem, 7vw, 4.6rem); line-height: .92; letter-spacing: .005em; }
+h3 { font-size: clamp(1.35rem, 3vw, 1.9rem); line-height: 1; letter-spacing: .02em; }
+
+p { margin: 0; }
+a { color: inherit; }
+
+section { padding-block: clamp(4rem, 11vw, 8.5rem); }
+
+.stack   { display: flex; flex-direction: column; gap: 1.15rem; }
+.stack-s { display: flex; flex-direction: column; gap: .6rem; }
+
+.rule {
+  height: 1px; border: 0; margin: 0;
+  background: linear-gradient(90deg, var(--line), transparent);
+}
+
+/* ============================ HERO ============================ */
+.hero {
+  position: relative;
+  min-height: min(94svh, 900px);
+  display: flex;
+  align-items: flex-end;
+  padding-block: clamp(5rem, 12vw, 8rem) clamp(3rem, 7vw, 5rem);
+  overflow: hidden;
+  isolation: isolate;
+
+  /* The hero is a photo panel: it keeps its own dark ground in BOTH themes,
+     so its text tokens are pinned here rather than inherited from :root. */
+  --text:  #F3EDF7;
+  --muted: #C6B7D1;
+  --verjus: #C8EE4E;
+  color: var(--text);
+}
+
+/* fruit at sunset, shot at the vineyard */
+.hero-bg { position: absolute; inset: 0; z-index: -3; overflow: hidden; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; display: block; }
+.hero-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(19,12,26,.42) 0%,
+    rgba(19,12,26,.34) 30%,
+    rgba(19,12,26,.80) 72%,
+    rgba(19,12,26,.94) 100%);
+}
+
+/* drifting fog — pulled right back now that a real photograph is doing the work */
+.fog { position: absolute; inset: -25%; z-index: -1; filter: blur(70px); opacity: var(--fog-op); }
+.fog i {
+  position: absolute; display: block; border-radius: 50%;
+  animation: drift 34s ease-in-out infinite alternate;
+}
+.fog i:nth-child(1) { width: 62vw; height: 62vw; left: -12%; top: -8%;  background: radial-gradient(circle, rgba(123,47,168,.55), transparent 68%); }
+.fog i:nth-child(2) { width: 54vw; height: 54vw; right: -14%; top: 12%; background: radial-gradient(circle, rgba(190,232,63,.20), transparent 66%); animation-duration: 45s; animation-direction: alternate-reverse; }
+.fog i:nth-child(3) { width: 70vw; height: 70vw; left: 22%; bottom: -30%; background: radial-gradient(circle, rgba(224,69,110,.28), transparent 70%); animation-duration: 52s; }
+@keyframes drift {
+  from { transform: translate3d(0,0,0) scale(1); }
+  to   { transform: translate3d(6%, -5%, 0) scale(1.18); }
+}
+
+/* film grain so the gradients don't read as a slick SaaS hero */
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: var(--grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wordmark {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(4rem, 17vw, 13rem);
+  line-height: .78;
+  letter-spacing: -.005em;
+  margin: 0;
+}
+.wordmark span { display: block; }
+.wordmark .b { color: var(--verjus); text-shadow: 0 0 34px rgba(198,245,60,.35); }
+
+/* ---------- attitude ticker ---------- */
+.ticker {
+  overflow: hidden; white-space: nowrap;
+  border-block: 1px solid var(--line);
+  background: var(--surface);
+  padding-block: .55rem;
+}
+.ticker span {
+  display: inline-block; padding-right: 2rem;
+  font-family: var(--display); text-transform: uppercase;
+  font-size: clamp(1rem, 2.6vw, 1.5rem); letter-spacing: .04em;
+  color: var(--verjus);
+  animation: tick 26s linear infinite;
+}
+@keyframes tick { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker span { animation: none; } }
+
+.hero-lede {
+  font-size: clamp(1.15rem, 1rem + .8vw, 1.6rem);
+  line-height: 1.4;
+  max-width: 30ch;
+}
+.hero-foot {
+  display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; align-items: baseline;
+  margin-top: clamp(1.5rem, 4vw, 2.75rem);
+}
+
+/* orchestrated load-in */
+.rise { opacity: 0; transform: translateY(18px); animation: rise .9s cubic-bezier(.2,.7,.3,1) forwards; }
+.rise:nth-child(1) { animation-delay: .05s; }
+.rise:nth-child(2) { animation-delay: .18s; }
+.rise:nth-child(3) { animation-delay: .32s; }
+.rise:nth-child(4) { animation-delay: .46s; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+
+/* ======================= TWO INGREDIENTS ======================= */
+.ingredients { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
+.ing-grid { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3.5rem); }
+@media (min-width: 800px) { .ing-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: start; } }
+
+.ing-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.ing-list li {
+  display: flex; align-items: baseline; gap: 1rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+.ing-list li:first-child { border-top: 1px solid var(--line); }
+.ing-list .n { font-family: var(--mono); font-size: .75rem; color: var(--verjus); letter-spacing: .1em; }
+.ing-list .t { font-family: var(--display); font-size: clamp(1.5rem, 4vw, 2.4rem); text-transform: uppercase; letter-spacing: .02em; }
+
+.nots { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; padding: 0; list-style: none; }
+.nots li {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase;
+  padding: .38rem .7rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted);
+  text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--must) 70%, transparent);
+  text-decoration-thickness: 2px;
+}
+
+/* ========================= SUGAR CHART ========================= */
+.chart { display: flex; flex-direction: column; gap: .1rem; margin-top: clamp(2rem, 5vw, 3rem); }
+.row {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 15rem) 1fr auto;
+  align-items: center;
+  gap: clamp(.6rem, 2vw, 1.25rem);
+  padding-block: .55rem;
+  border-bottom: 1px solid var(--line);
+}
+.row .name { font-size: clamp(.85rem, .8rem + .2vw, 1rem); line-height: 1.25; }
+.row .track { height: 22px; position: relative; }
+.row .bar {
+  position: absolute; inset-block: 0; left: 0;
+  width: 0;
+  background: var(--surface-2);
+  border-right: 2px solid var(--muted);
+  transition: width 1.1s cubic-bezier(.2,.75,.3,1);
+}
+.chart.in .bar { width: var(--w); }
+.row .val { font-family: var(--mono); font-size: .85rem; font-variant-numeric: tabular-nums; color: var(--muted); }
+
+.row.us { border-bottom-color: var(--verjus); }
+.row.us .name { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.1rem, 3vw, 1.5rem); letter-spacing: .02em; color: var(--verjus); }
+.row.us .bar { background: var(--verjus); border-right-color: var(--verjus); }
+.row.us .val { color: var(--verjus); font-weight: 700; }
+
+/* stagger the bars so the chart draws itself */
+.chart.in .row:nth-child(1) .bar { transition-delay: .00s; }
+.chart.in .row:nth-child(2) .bar { transition-delay: .07s; }
+.chart.in .row:nth-child(3) .bar { transition-delay: .14s; }
+.chart.in .row:nth-child(4) .bar { transition-delay: .21s; }
+.chart.in .row:nth-child(5) .bar { transition-delay: .28s; }
+.chart.in .row:nth-child(6) .bar { transition-delay: .35s; }
+.chart.in .row:nth-child(7) .bar { transition-delay: .46s; }
+.chart.in .row:nth-child(8) .bar { transition-delay: .53s; }
+
+.pull {
+  font-family: var(--display); text-transform: uppercase;
+  font-size: clamp(1.6rem, 5.5vw, 3.2rem); line-height: .98; letter-spacing: .01em;
+  max-width: 22ch;
+}
+.pull em { font-style: normal; color: var(--verjus); }
+
+.footnote { font-family: var(--mono); font-size: .72rem; line-height: 1.7; color: var(--muted); letter-spacing: .02em; }
+
+/* ========================== THE LINEUP ========================== */
+.rail {
+  display: flex; gap: 1rem;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: clamp(1.5rem,4vw,2.5rem) var(--pad) 1.5rem;
+  margin-inline: calc(50% - 50vw);
+  scrollbar-width: thin;
+}
+.can {
+  scroll-snap-align: center;
+  flex: 0 0 clamp(15rem, 68vw, 19rem);
+  min-height: 25rem;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: .7rem;
+  padding: 1.5rem;
+  border-radius: 9px;
+  /* cans keep their own dark ground in either theme — they're objects, not surfaces */
+  background:
+    linear-gradient(175deg, transparent 38%, rgba(6,3,10,.86) 100%),
+    linear-gradient(150deg, var(--c1), var(--c2));
+  color: #F6F1F8;
+  box-shadow: var(--shadow);
+  position: relative; overflow: hidden;
+}
+.can::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, rgba(255,255,255,.15) 0 6%, transparent 14% 86%, rgba(255,255,255,.09) 94% 100%);
+  pointer-events: none;
+}
+.can .lot { font-family: var(--mono); font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; opacity: .78; }
+.can .nm { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.9rem, 6vw, 2.6rem); line-height: .9; letter-spacing: .015em; }
+.can .var { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; opacity: .85; }
+.can .note { font-size: .92rem; line-height: 1.45; opacity: .93; }
+.can .spec {
+  display: flex; gap: .9rem; flex-wrap: wrap;
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase;
+  padding-top: .7rem; border-top: 1px solid rgba(255,255,255,.22); opacity: .88;
+}
+
+/* can render fills the card; text rides a scrim above it */
+.can .render { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.can .scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(6,3,10,.55) 68%, rgba(6,3,10,.92) 100%); }
+.can > p, .can > h3 { position: relative; }
+.can .nm { font-size: clamp(1.5rem, 4.5vw, 1.9rem); }
+.can .note { display: none; }
+
+/* photograph at the head of the rail, so the row reads fruit -> cans */
+.photo-card { padding: 0; background: var(--surface-2); }
+.photo-card::before { display: none; }
+.photo-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 50%; }
+.photo-card figcaption {
+  position: relative; margin-top: auto; padding: 4rem 1.5rem 1.5rem;
+  font-family: var(--mono); font-size: .7rem; line-height: 1.7;
+  letter-spacing: .08em; text-transform: uppercase; color: #F6F1F8;
+  background: linear-gradient(0deg, rgba(6,3,10,.92) 35%, transparent 100%);
+}
+
+/* ====================== VINEYARD FOOTAGE ====================== */
+.field { display: grid; grid-template-columns: 1fr; gap: clamp(1.75rem, 5vw, 3.5rem); align-items: center; }
+@media (min-width: 900px) { .field { grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); } }
+
+.reel { margin: 0; display: flex; flex-direction: column; gap: .8rem; }
+.reel .frame {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: 9px;
+  overflow: hidden;
+  background: var(--surface-2);
+  box-shadow: var(--shadow);
+}
+.reel video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.reel figcaption,
+.shot figcaption {
+  font-family: var(--mono); font-size: .68rem; line-height: 1.7;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+}
+
+.shot { margin: 0; grid-column: 1 / -1; display: flex; flex-direction: column; gap: .8rem; }
+.shot img {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 62%;
+  border-radius: 9px; display: block; box-shadow: var(--shadow);
+}
+
+/* ========================== PARENTS =========================== */
+.parents { background: var(--surface); border-block: 1px solid var(--line); }
+.cards { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 9px; overflow: hidden; margin-top: clamp(2rem,5vw,3rem); }
+@media (min-width: 720px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+.card { background: var(--surface); padding: clamp(1.4rem, 3vw, 2rem); display: flex; flex-direction: column; gap: .6rem; }
+.card .k { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.6rem,4vw,2.1rem); line-height: 1; color: var(--verjus); letter-spacing: .02em; }
+.card p { font-size: .95rem; color: var(--muted); }
+
+blockquote {
+  margin: clamp(2.5rem,6vw,3.5rem) 0 0;
+  padding-left: clamp(1rem, 3vw, 1.75rem);
+  border-left: 3px solid var(--must);
+  font-family: var(--display); text-transform: uppercase;
+  font-size: clamp(1.4rem, 4.4vw, 2.4rem); line-height: 1.02; letter-spacing: .01em;
+  max-width: 24ch;
+}
+
+/* ========================== SIGN UP =========================== */
+.signup { text-align: left; }
+form { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.75rem; max-width: 34rem; }
+input[type="email"] {
+  flex: 1 1 15rem; min-width: 0;
+  padding: .95rem 1.1rem;
+  font-family: var(--mono); font-size: .9rem;
+  color: var(--text); background: var(--surface-2);
+  border: 1px solid var(--line); border-radius: 8px;
+}
+input[type="email"]::placeholder { color: var(--muted); }
+button {
+  padding: .95rem 1.6rem;
+  font-family: var(--display); text-transform: uppercase; letter-spacing: .06em;
+  font-size: 1.05rem;
+  color: var(--verjus-in); background: var(--verjus);
+  border: 0; border-radius: 8px; cursor: pointer;
+  transition: transform .18s ease, filter .18s ease;
+}
+button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+:focus-visible { outline: 2px solid var(--must); outline-offset: 3px; border-radius: 4px; }
+.formnote { font-family: var(--mono); font-size: .7rem; color: var(--muted); margin-top: .8rem; letter-spacing: .04em; }
+.formnote[data-ok] { color: var(--verjus); }
+
+/* =========================== FOOTER =========================== */
+footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem); }
+.foot-grid { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; justify-content: space-between; align-items: flex-end; }
+.footmark { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.6rem,5vw,2.4rem); line-height: .9; letter-spacing: .02em; }
+.disclaim { font-family: var(--mono); font-size: .68rem; line-height: 1.8; color: var(--muted); max-width: 58ch; letter-spacing: .02em; }
+
+/* ========================== REVEALS =========================== */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.3,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fog i { animation: none; }
+  .rise { animation: none; opacity: 1; transform: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .chart .bar { transition: none; width: var(--w); }
+  button:hover { transform: none; }
+}
+</style>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="media/hero-bin.jpg" alt="" fetchpriority="high" decoding="async">
+  </div>
+  <div class="fog" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap stack">
+    <p class="eyebrow rise">Pre-launch &nbsp;·&nbsp; First drop at green harvest</p>
+    <h1 class="wordmark rise"><span>Moody</span><span class="b">Creek</span></h1>
+    <p class="hero-lede rise">Fourteen wine grapes. Pressed loud, poured cold, zero caffeine. All mood.</p>
+    <div class="hero-foot rise">
+      <p class="eyebrow">Grapes &amp; bubbles. Nothing else.</p>
+      <p class="eyebrow">Caffeine-free</p>
+      <p class="eyebrow">0g added sugar</p>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><span>Moody drinks. &nbsp;·&nbsp; Zero caffeine. &nbsp;·&nbsp; All mood. &nbsp;·&nbsp; Fourteen grapes. &nbsp;·&nbsp; Grapes &amp; bubbles. Nothing else. &nbsp;·&nbsp; Moody drinks. &nbsp;·&nbsp; Zero caffeine. &nbsp;·&nbsp; All mood. &nbsp;·&nbsp; Fourteen grapes. &nbsp;·&nbsp; Grapes &amp; bubbles. Nothing else. &nbsp;·&nbsp; </span></div>
+
+<!-- ======================= TWO INGREDIENTS ======================= -->
+<section class="ingredients">
+  <div class="wrap ing-grid">
+    <div class="stack reveal">
+      <p class="eyebrow">The ingredient list</p>
+      <h2>We overthought<br>two things.</h2>
+      <p class="narrow">Most drinks have a paragraph on the back. Ours has a sentence. Wine grapes give you enough flavor, color and acid on their own that you don't need to hand a chemist the rest of the job.</p>
+    </div>
+    <div class="reveal">
+      <ul class="ing-list">
+        <li><span class="n">01</span><span class="t">Grape juice</span></li>
+        <li><span class="n">02</span><span class="t">Carbonated water</span></li>
+      </ul>
+      <ul class="nots">
+        <li>Added sugar</li><li>Concentrate</li><li>Caffeine</li><li>Artificial color</li>
+        <li>Natural flavors</li><li>Preservatives</li><li>Sweeteners</li><li>Citric acid</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SUGAR CHART ========================= -->
+<section>
+  <div class="wrap stack">
+    <p class="eyebrow reveal">Sugar per 12 oz</p>
+    <h2 class="reveal">Real grapes.<br>A fraction of<br>the sugar.</h2>
+    <p class="narrow reveal">Every gram of sugar in a Moody Creek walked in attached to a wine grape. We press whole clusters and cut the juice with bubbles — the whole flavor of the vineyard, at about a third the sugar of the loud cans.</p>
+
+    <div class="chart reveal" role="img" aria-label="Sugar per 12 ounce serving: Mountain Dew 46 grams, energy drink 40, Coca-Cola 39, sports drink 21, Moody Creek 12, Moody Creek Green Harvest 7.">
+      <div class="row"><span class="name">Mountain Dew</span><span class="track"><span class="bar" style="--w:100%"></span></span><span class="val">46g</span></div>
+      <div class="row"><span class="name">Energy drink</span><span class="track"><span class="bar" style="--w:87%"></span></span><span class="val">40g</span></div>
+      <div class="row"><span class="name">Coca-Cola</span><span class="track"><span class="bar" style="--w:85%"></span></span><span class="val">39g</span></div>
+      <div class="row"><span class="name">Sports drink</span><span class="track"><span class="bar" style="--w:46%"></span></span><span class="val">21g</span></div>
+      <div class="row us"><span class="name">Moody Creek</span><span class="track"><span class="bar" style="--w:26%"></span></span><span class="val">12g</span></div>
+      <div class="row us"><span class="name">Green Harvest</span><span class="track"><span class="bar" style="--w:15%"></span></span><span class="val">7g</span></div>
+    </div>
+
+    <p class="pull reveal" style="margin-top:clamp(2rem,5vw,3rem)">We cut ours with bubbles until it was <em>about a third of a soda</em> — and left the sugar bowl alone.</p>
+  </div>
+</section>
+
+<!-- ========================== THE LINEUP ========================== -->
+<section style="padding-bottom:clamp(2rem,6vw,4rem)">
+  <div class="wrap stack">
+    <p class="eyebrow reveal">The lineup &nbsp;·&nbsp; scroll →</p>
+    <h2 class="reveal">Fourteen grapes.<br>Never the same<br>can twice.</h2>
+    <p class="narrow reveal">Wine grapes ripen for a few weeks and then they're gone until next year. So the lineup moves. Some of these exist for one fortnight in July and then not again for twelve months.</p>
+  </div>
+
+  <div class="rail reveal">
+    <figure class="can photo-card">
+      <img src="media/vine-cluster.jpg" alt="Ripe dark grape clusters hanging on the vine" loading="lazy" decoding="async">
+      <figcaption>This is the whole supply chain.<br>Fourteen varieties, one hillside.</figcaption>
+    </figure>
+
+    <article class="can" style="--c1:#C9E04A; --c2:#1E2A0A">
+      <img class="render" src="media/cans/01-sauvignon-blanc.jpg" alt="Sauvignon Blanc can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 001 · Sep</p>
+      <h3 class="nm">Sauvignon Blanc</h3>
+      <p class="var">My mind's gone Blanc.</p>
+      <p class="note">Water-white and razor-crisp. Cut grass, lime pith, gooseberry.</p>
+      <p class="spec"><span>17% juice</span><span>11g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#E8C25A; --c2:#2A1F06">
+      <img class="render" src="media/cans/02-semillon.jpg" alt="Semillon can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 002 · Sep</p>
+      <h3 class="nm">Sémillon</h3>
+      <p class="var">One in a Sémillon.</p>
+      <p class="note">Fig, beeswax, yellow apple. The grape nobody knew we had.</p>
+      <p class="spec"><span>18% juice</span><span>12g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#E5B94F; --c2:#2A1D08">
+      <img class="render" src="media/cans/03-roussanne.jpg" alt="Roussanne can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 003 · Oct</p>
+      <h3 class="nm">Roussanne</h3>
+      <p class="var">Roussanne shine, sleepyhead.</p>
+      <p class="note">Pear, herbal tea, white flowers, a little honey.</p>
+      <p class="spec"><span>18% juice</span><span>12g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#DCCB7E; --c2:#28230F">
+      <img class="render" src="media/cans/04-marsanne.jpg" alt="Marsanne can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 004 · Oct</p>
+      <h3 class="nm">Marsanne</h3>
+      <p class="var">Is there life on Marsanne?</p>
+      <p class="note">Honeysuckle, almond skin, quince. The soft-spoken one.</p>
+      <p class="spec"><span>18% juice</span><span>12g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#F2647F; --c2:#380C18">
+      <img class="render" src="media/cans/05-grenache.jpg" alt="Grenache can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 005 · Sep</p>
+      <h3 class="nm">Grenache</h3>
+      <p class="var">We hold no Grenache.</p>
+      <p class="note">Strawberry, raspberry, watermelon rind. Sunset pink.</p>
+      <p class="spec"><span>18% juice</span><span>12g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#D6294C; --c2:#320710">
+      <img class="render" src="media/cans/06-montepulciano.jpg" alt="Montepulciano can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 006 · Oct</p>
+      <h3 class="nm">Montepulciano</h3>
+      <p class="var">The full Monte.</p>
+      <p class="note">Juicy black cherry and plum. Zero grip, all glug.</p>
+      <p class="spec"><span>20% juice</span><span>13g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#BE2C4A; --c2:#2E060F">
+      <img class="render" src="media/cans/07-merlot.jpg" alt="Merlot can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 007 · Oct</p>
+      <h3 class="nm">Merlot</h3>
+      <p class="var">How Merlot can you go?</p>
+      <p class="note">Plum and black cherry, round and easy. Limbo champion.</p>
+      <p class="spec"><span>17% juice</span><span>11g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#9333CC; --c2:#22083A">
+      <img class="render" src="media/cans/08-malbec.jpg" alt="Malbec can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 008 · Oct</p>
+      <h3 class="nm">Malbec</h3>
+      <p class="var">Malbec by popular demand.</p>
+      <p class="note">Blueberry, plum skin, violet. The inkiest juice on the hill.</p>
+      <p class="spec"><span>17% juice</span><span>11g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#8226C4; --c2:#1E0632">
+      <img class="render" src="media/cans/09-syrah.jpg" alt="Syrah can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 009 · Oct</p>
+      <h3 class="nm">Syrah</h3>
+      <p class="var">Que Syrah, Syrah.</p>
+      <p class="note">Blackberry and cracked black pepper. Whatever will be, will be purple.</p>
+      <p class="spec"><span>17% juice</span><span>11g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#CC3E70; --c2:#300A1A">
+      <img class="render" src="media/cans/10-cabernet-franc.jpg" alt="Cabernet Franc can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 010 · Sep</p>
+      <h3 class="nm">Cabernet Franc</h3>
+      <p class="var">Let's be Franc.</p>
+      <p class="note">Raspberry, bell pepper, leafy and sharp. Honestly.</p>
+      <p class="spec"><span>18% juice</span><span>12g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#7A31AE; --c2:#1C0730">
+      <img class="render" src="media/cans/11-cabernet-sauvignon.jpg" alt="Cabernet Sauvignon can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 011 · Oct</p>
+      <h3 class="nm">Cabernet<br>Sauvignon</h3>
+      <p class="var">Hail a Cab.</p>
+      <p class="note">Blackcurrant with a green streak. Twelve blocks deep.</p>
+      <p class="spec"><span>19% juice</span><span>12g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#7B3FD4; --c2:#180634">
+      <img class="render" src="media/cans/12-petit-verdot.jpg" alt="Petit Verdot can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 012 · Oct</p>
+      <h3 class="nm">Petit Verdot</h3>
+      <p class="var">Sweat the Petit stuff.</p>
+      <p class="note">Violet, blueberry, ink. Small name, blackest can.</p>
+      <p class="spec"><span>20% juice</span><span>12g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#6A44A8; --c2:#150628">
+      <img class="render" src="media/cans/13-mourvedre.jpg" alt="Mourvedre can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 013 · Oct</p>
+      <h3 class="nm">Mourvèdre</h3>
+      <p class="var">The Mourvèdre, the merrier.</p>
+      <p class="note">Earthy, gamey, plum skin. Last grape off the hill every year.</p>
+      <p class="spec"><span>16% juice</span><span>11g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#5E3AA0; --c2:#120524">
+      <img class="render" src="media/cans/14-tannat.jpg" alt="Tannat can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 014 · Oct</p>
+      <h3 class="nm">Tannat</h3>
+      <p class="var">To be or Tannat to be?</p>
+      <p class="note">Dense blackberry and graphite. That is the question.</p>
+      <p class="spec"><span>15% juice</span><span>10g sugar</span></p>
+    </article>
+
+    <article class="can" style="--c1:#A9DC33; --c2:#17230A">
+      <img class="render" src="media/cans/15-green-harvest.jpg" alt="Green Harvest can" loading="lazy" decoding="async">
+      <div class="scrim" aria-hidden="true"></div>
+      <p class="lot">Lot 015 · Jul</p>
+      <h3 class="nm">Green<br>Harvest</h3>
+      <p class="var">Picked too soon. On purpose.</p>
+      <p class="note">Unripe fruit rescued off the ground in July. Wildly tart, barely sweet.</p>
+      <p class="spec"><span>24% juice</span><span>7g sugar</span></p>
+    </article>
+  </div>
+</section>
+
+<!-- ====================== THE GREEN HARVEST ====================== -->
+<section>
+  <div class="wrap stack">
+    <p class="eyebrow reveal">Where this came from</p>
+    <h2 class="reveal">Every summer<br>a vineyard throws<br>half its fruit<br>on the ground.</h2>
+    <div class="field reveal">
+      <figure class="reel">
+        <div class="frame">
+          <video id="reel-video" poster="media/vineyard-poster.jpg" muted loop playsinline autoplay preload="metadata" controls>
+            <source src="media/vineyard.mp4" type="video/mp4">
+            Your browser can't play this video.
+          </video>
+        </div>
+        <figcaption>The picking head working the rows — thirteen varieties, one hillside.</figcaption>
+      </figure>
+      <div class="stack">
+        <p>It's called green harvest. Growers cut off a share of the unripe clusters in July so the vines pour everything into what's left. The fruit that gets dropped is small, hard, sour as a lemon — and it lies there.</p>
+        <p>We asked if we could have it.</p>
+        <p>Turns out unripe wine grapes are exactly what a drink like this needs: barely any sugar, enormous acid, and all of the variety's character already showing. Blend a little of that into ripe juice and you land somewhere soda can't reach — low sugar and genuinely tart — without opening a single bag of anything.</p>
+        <p>That's the whole trick. There is no other trick.</p>
+      </div>
+      <figure class="shot">
+        <img src="media/harvest-bins.jpg" alt="Picking bins full of dark grapes beside a tractor in the vineyard rows" loading="lazy" decoding="async">
+        <figcaption>Bins in the rows at harvest — the same fruit, four weeks later than we want it.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== PARENTS =========================== -->
+<section class="parents">
+  <div class="wrap stack">
+    <p class="eyebrow reveal">If you're the one buying it</p>
+    <h2 class="reveal">The straight version.</h2>
+    <div class="cards reveal">
+      <div class="card">
+        <p class="k">No caffeine</p>
+        <p>Not a trace, and never. It's grapes. That also means it's allowed in most of the places energy drinks aren't.</p>
+      </div>
+      <div class="card">
+        <p class="k">0g added</p>
+        <p>Every gram of sugar in the can walked in attached to a grape. The Nutrition Facts panel says so in FDA's own words.</p>
+      </div>
+      <div class="card">
+        <p class="k">~12g</p>
+        <p>Per 12 oz can — roughly a third of a cola, with nothing added to get there.</p>
+      </div>
+    </div>
+    <blockquote class="reveal">It's like biting into a cold grape that fizzes back.</blockquote>
+  </div>
+</section>
+
+<!-- ========================== SIGN UP =========================== -->
+<section class="signup">
+  <div class="wrap stack">
+    <p class="eyebrow reveal">The first drop</p>
+    <h2 class="reveal">Nothing has been<br>canned yet.</h2>
+    <p class="narrow reveal">The press runs at green harvest. The first batch will be small, numbered, and gone quickly. Leave an address and we'll tell you when — and nothing else, ever.</p>
+    <form class="reveal" id="drop-form" novalidate>
+      <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
+      <input id="email" type="email" name="email" placeholder="you@somewhere.com" autocomplete="email" required>
+      <button type="submit">Get the drop</button>
+    </form>
+    <p class="formnote" id="formnote">Demo form — connect this to your email provider before launch.</p>
+  </div>
+</section>
+
+<!-- =========================== FOOTER =========================== -->
+<footer>
+  <div class="wrap foot-grid">
+    <p class="footmark">Moody Creek<br><span style="color:var(--verjus)">Moody drinks.</span></p>
+    <p class="disclaim">
+      Concept page for a beverage that does not exist yet. Nutrition figures are formulation targets, not tested values from a finished product — they'll be replaced with lab results before anything is sold. Comparison figures are typical published values for a 12 fl oz serving. Not a medical claim of any kind.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scroll reveals — chart bars draw when the chart enters view.
+  var targets = document.querySelectorAll(".reveal, .chart");
+  if (reduce || !("IntersectionObserver" in window)) {
+    targets.forEach(function (el) { el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
+    targets.forEach(function (el) { io.observe(el); });
+  }
+
+  // Vineyard footage: don't autoplay for anyone who asked for less motion —
+  // leave the poster up and let them start it from the controls.
+  var reel = document.getElementById("reel-video");
+  if (reel && reduce) {
+    reel.removeAttribute("autoplay");
+    reel.autoplay = false;
+    reel.pause();
+  }
+
+  // Sign-up form. No backend wired — swap this handler for your provider's endpoint.
+  var form = document.getElementById("drop-form");
+  var note = document.getElementById("formnote");
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var email = document.getElementById("email");
+    if (!email.value || email.value.indexOf("@") < 1) {
+      note.textContent = "That address is missing an @ — try again.";
+      note.removeAttribute("data-ok");
+      email.focus();
+      return;
+    }
+    note.textContent = "You're on the list. (Demo only — nothing was sent anywhere.)";
+    note.setAttribute("data-ok", "");
+    form.reset();
+  });
+})();
+</script>
+<!--/ARTIFACT-->
+</body>
+</html>

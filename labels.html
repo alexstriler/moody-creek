@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moody Creek — The Variety Line</title>
+</head>
+<body>
+<!--ARTIFACT-->
+<style>
+:root {
+  --bg:#100A16; --surface:#1A1024; --surface-2:#241633; --line:#3A2A48;
+  --text:#F2ECF6; --muted:#A08FAE; --verjus:#BEE83F; --verjus-in:#141C06;
+  --display:"Haettenschweiler","Impact","Franklin Gothic Bold","Arial Narrow Bold","Arial Narrow",sans-serif;
+  --body:"Optima","Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;
+  --mono:"Courier New",Courier,ui-monospace,monospace;
+  --nf:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --pad:clamp(1.25rem,5vw,4rem);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#EEE9F2; --surface:#F9F6FB; --surface-2:#E3DCE9; --line:#D2C7DA;
+    --text:#1D1226; --muted:#63546E; --verjus:#4A6605; --verjus-in:#F7FFE4;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#EEE9F2; --surface:#F9F6FB; --surface-2:#E3DCE9; --line:#D2C7DA;
+  --text:#1D1226; --muted:#63546E; --verjus:#4A6605; --verjus-in:#F7FFE4;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);
+  font-size:clamp(1rem,.96rem + .2vw,1.0625rem);line-height:1.6;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased}
+.wrap{width:min(100% - calc(var(--pad)*2),1200px);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;margin:0;text-wrap:balance}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0}
+
+header{padding-block:clamp(3.5rem,9vw,6.5rem) clamp(2rem,5vw,3rem)}
+h1{font-size:clamp(2.8rem,10vw,7rem);line-height:.86;letter-spacing:.005em}
+h1 .b{color:var(--verjus)}
+.lede{max-width:56ch;margin-top:1.4rem;font-size:clamp(1.05rem,1rem + .4vw,1.3rem);line-height:1.45}
+
+.stats{display:flex;flex-wrap:wrap;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;margin-top:clamp(2rem,5vw,3rem)}
+.stats div{flex:1 1 9rem;background:var(--surface);padding:1.1rem 1.25rem}
+.stats .k{font-family:var(--display);font-size:1.9rem;line-height:1;color:var(--verjus)}
+.stats .v{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
+
+.grid{display:grid;gap:clamp(2rem,4vw,3rem);grid-template-columns:1fr;
+  padding-block:clamp(2rem,5vw,3.5rem) clamp(4rem,9vw,7rem)}
+@media(min-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1180px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.pair{display:flex;gap:1rem;align-items:stretch}
+@media(max-width:430px){.pair{flex-direction:column;align-items:center}
+  .can-front{flex-basis:auto;width:min(64vw,13rem);min-height:24rem}
+  .can-back{width:100%}}
+
+/* ---- the can ---- */
+.can-front{flex:0 0 clamp(9rem,26vw,11rem);display:flex;flex-direction:column;
+  filter:drop-shadow(0 18px 34px rgba(0,0,0,.45))}
+.can-top,.can-bot{height:12px;background:linear-gradient(90deg,#8C8C96,#E6E6EC 28%,#9A9AA4 60%,#C9C9D2 82%,#7E7E88);
+  border-radius:50%/100% 100% 0 0}
+.can-bot{border-radius:50%/0 0 100% 100%;margin-top:-1px}
+.can-top{margin-bottom:-1px}
+.can-body{flex:1;position:relative;overflow:hidden;padding:1.1rem .95rem 1rem;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;text-align:center;color:#FBF8FC;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.34) 0%,rgba(255,255,255,.14) 22%,rgba(255,255,255,0) 46%,rgba(0,0,0,.30) 100%),
+    linear-gradient(178deg,var(--c1) 0%,var(--c1) 34%,var(--c2) 100%)}
+.brand{font-family:var(--mono);font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;opacity:.92}
+.art{width:4.7rem;height:auto;margin-block:.2rem;filter:drop-shadow(0 3px 7px rgba(0,0,0,.35))}
+.variety{font-size:clamp(1.05rem,3.4vw,1.35rem);line-height:.92;letter-spacing:.02em;
+  text-shadow:0 2px 10px rgba(0,0,0,.35)}
+.punline{font-family:var(--body);font-style:italic;font-size:.66rem;line-height:1.25;opacity:.95}
+.kindline{font-family:var(--mono);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+.bigstat{display:flex;align-items:baseline;gap:.4rem;margin-top:.35rem;
+  padding:.45rem .7rem;border-radius:8px;background:rgba(0,0,0,.34)}
+.bigstat .num{font-family:var(--display);font-size:2.5rem;line-height:.8;letter-spacing:-.01em}
+.bigstat .unit{font-size:1.1rem}
+.bigstat .lbl{font-family:var(--mono);font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;
+  text-align:left;line-height:1.3;opacity:.9}
+.flags{list-style:none;margin:.3rem 0 0;padding:0;display:flex;flex-direction:column;gap:.22rem;width:100%}
+.flags li{font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.24rem .3rem;border:1px solid rgba(255,255,255,.34);border-radius:99px}
+.footline{margin-top:auto;padding-top:.6rem;font-family:var(--mono);font-size:.46rem;
+  letter-spacing:.09em;text-transform:uppercase;opacity:.9;border-top:1px solid rgba(255,255,255,.28);width:100%}
+
+/* ---- the back ---- */
+.can-back{flex:1;min-width:0;display:flex;flex-direction:column;gap:.6rem;
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem}
+.bk-name{font-family:var(--display);text-transform:uppercase;font-size:1.15rem;line-height:1;letter-spacing:.02em}
+.bk-note{font-size:.82rem;line-height:1.4;color:var(--muted)}
+.bk-spec{font-family:var(--mono);font-size:.58rem;line-height:1.7;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--muted)}
+.ingr{font-size:.7rem;line-height:1.45}
+
+/* ---- FDA-style panel ---- */
+.nf{width:100%;border-collapse:collapse;background:#fff;color:#000;
+  font-family:var(--nf);font-size:.62rem;line-height:1.25;border:1px solid #000;
+  font-variant-numeric:tabular-nums}
+.nf caption{caption-side:top;font-family:var(--display);font-size:1.5rem;line-height:1;
+  text-transform:none;letter-spacing:-.01em;text-align:left;padding:.2rem .3rem 0;
+  background:#fff;color:#000;border:1px solid #000;border-bottom:0}
+.nf td{padding:.1rem .3rem;border:0}
+.nf .r{text-align:right}
+.nf .srv td{font-size:.6rem}
+.nf .bold td{font-weight:700}
+.nf .bar td{border-top:9px solid #000;padding:0}
+.nf .rule td{border-top:4px solid #000;padding:0}
+.nf .thin td{border-top:4px solid #000;padding:0}
+.nf .cal td{font-weight:700;font-size:.95rem;padding-block:.05rem}
+.nf .cal td:last-child{font-size:1.5rem;line-height:1}
+.nf .dv td{font-weight:700;font-size:.56rem;border-bottom:1px solid #000}
+.nf tr:not(.srv):not(.bar):not(.rule):not(.thin):not(.cal):not(.dv):not(.fine) td{border-bottom:1px solid #000}
+.nf .in td:first-child{padding-left:1.1rem}
+.nf .in2 td:first-child{padding-left:2rem}
+.nf .fine td{font-size:.5rem;line-height:1.3;padding:.25rem .3rem;border:0}
+
+/* ---- method ---- */
+.method{background:var(--surface);border-block:1px solid var(--line);padding-block:clamp(3rem,7vw,5rem)}
+.method h2{font-size:clamp(1.9rem,5vw,3rem);line-height:.95}
+.method .cols{display:grid;gap:clamp(1.5rem,4vw,2.5rem);margin-top:1.75rem}
+@media(min-width:820px){.method .cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.method p{max-width:62ch}
+.method p + p{margin-top:.9rem}
+code{font-family:var(--mono);font-size:.85em;background:var(--surface-2);padding:.1rem .35rem;border-radius:4px}
+.warn{border-left:3px solid var(--verjus);padding-left:1rem}
+footer{padding-block:clamp(2.5rem,6vw,4rem)}
+.disclaim{font-family:var(--mono);font-size:.66rem;line-height:1.8;color:var(--muted);max-width:70ch}
+a{color:var(--verjus)}
+:focus-visible{outline:2px solid var(--verjus);outline-offset:3px}
+</style>
+
+<header class="wrap">
+  <p class="eyebrow">Moody Creek &middot; The variety line</p>
+  <h1>One grape.<br>One can.<br><span class="b">15 of them.</span></h1>
+  <p class="lede">Energy drinks put a big number on the front of the can. So do we — ours is just
+    the number they'd rather you didn't look for. Every can is one variety, pressed early, cut with
+    carbonated water, and nothing else.</p>
+  <div class="stats">
+    <div><p class="k">15</p><p class="v">single-variety cans</p></div>
+    <div><p class="k">9&ndash;13g</p><p class="v">sugar per 12 oz</p></div>
+    <div><p class="k">40&ndash;55</p><p class="v">calories</p></div>
+    <div><p class="k">0mg</p><p class="v">caffeine</p></div>
+    <div><p class="k">2</p><p class="v">ingredients</p></div>
+  </div>
+</header>
+
+<main class="wrap grid">
+<article class="pair" id="sémillon">
+
+  <div class="can-front" style="--c1:#E8C25A; --c2:#2A1F06">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><circle cx="18" cy="26" r="2.6" fill="#151020" opacity=".16"/><circle cx="34" cy="26" r="2.6" fill="#151020" opacity=".16"/><circle cx="50" cy="26" r="2.6" fill="#151020" opacity=".16"/><circle cx="66" cy="26" r="2.6" fill="#151020" opacity=".16"/><circle cx="82" cy="26" r="2.6" fill="#151020" opacity=".16"/><circle cx="18" cy="42" r="2.6" fill="#151020" opacity=".16"/><circle cx="34" cy="42" r="2.6" fill="#151020" opacity=".16"/><circle cx="50" cy="42" r="2.6" fill="#151020" opacity=".16"/><circle cx="82" cy="42" r="2.6" fill="#151020" opacity=".16"/><circle cx="18" cy="58" r="2.6" fill="#151020" opacity=".16"/><circle cx="34" cy="58" r="2.6" fill="#151020" opacity=".16"/><circle cx="50" cy="58" r="2.6" fill="#151020" opacity=".16"/><circle cx="66" cy="58" r="2.6" fill="#151020" opacity=".16"/><circle cx="82" cy="58" r="2.6" fill="#151020" opacity=".16"/><circle cx="18" cy="74" r="2.6" fill="#151020" opacity=".16"/><circle cx="34" cy="74" r="2.6" fill="#151020" opacity=".16"/><circle cx="50" cy="74" r="2.6" fill="#151020" opacity=".16"/><circle cx="66" cy="74" r="2.6" fill="#151020" opacity=".16"/><circle cx="82" cy="74" r="2.6" fill="#151020" opacity=".16"/><circle cx="66" cy="42" r="8" fill="#E8C25A" stroke="#151020" stroke-width="3.5"/><g stroke="#151020" stroke-width="3" stroke-linecap="round"><line x1="66" y1="26" x2="66" y2="20"/><line x1="66" y1="58" x2="66" y2="64"/><line x1="50" y1="42" x2="44" y2="42"/><line x1="82" y1="42" x2="88" y2="42"/><line x1="55" y1="31" x2="51" y2="27"/><line x1="77" y1="53" x2="81" y2="57"/></g></g></svg>
+      <h3 class="variety">Sémillon</h3>
+      <p class="punline">One in a Sémillon.</p>
+      <p class="kindline">White grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">12<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">18% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#E8C25A">Sémillon</p>
+    <p class="bk-note">Fig, beeswax, yellow apple. The one nobody knew you had.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 12g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 12g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 7mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 85mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, sémillon grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 18&deg;Bx &middot; 18% juice &middot; 64 mL juice per can<br>
+      Block peak this season: 20.0*&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="sauvignon-blanc">
+
+  <div class="can-front" style="--c1:#C9E04A; --c2:#1E2A0A">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><ellipse cx="50" cy="42" rx="26" ry="17" fill="#fff" stroke="#151020" stroke-width="4"/><circle cx="38" cy="66" r="6" fill="#fff" stroke="#151020" stroke-width="3.5"/><circle cx="31" cy="77" r="3.5" fill="#fff" stroke="#151020" stroke-width="3"/><circle cx="50" cy="42" r="2.5" fill="#C9E04A"/></g></svg>
+      <h3 class="variety">Sauvignon Blanc</h3>
+      <p class="punline">My mind's gone Blanc.</p>
+      <p class="kindline">White grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">11<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">17% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#C9E04A">Sauvignon Blanc</p>
+    <p class="bk-note">Cut grass, lime pith, gooseberry. Bone dry.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 12g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 11g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 7mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 80mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, sauvignon blanc grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 19&deg;Bx &middot; 17% juice &middot; 60 mL juice per can<br>
+      Block peak this season: 23.0*&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="roussanne">
+
+  <div class="can-front" style="--c1:#E5B94F; --c2:#2A1D08">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><circle cx="50" cy="64" r="16" fill="#E5B94F" stroke="#151020" stroke-width="4"/><rect x="18" y="64" width="64" height="22" fill="#FFF7EE"/><line x1="16" y1="64" x2="84" y2="64" stroke="#151020" stroke-width="4" stroke-linecap="round"/><g stroke="#151020" stroke-width="3.5" stroke-linecap="round"><line x1="50" y1="40" x2="50" y2="32"/><line x1="34" y1="46" x2="28" y2="40"/><line x1="66" y1="46" x2="72" y2="40"/></g><text x="66" y="30" font-family="Courier New" font-size="12" font-weight="bold" fill="#151020">z z</text></g></svg>
+      <h3 class="variety">Roussanne</h3>
+      <p class="punline">Roussanne shine, sleepyhead.</p>
+      <p class="kindline">White grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">12<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">18% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#E5B94F">Roussanne</p>
+    <p class="bk-note">Pear, herbal tea, white flowers, honey.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 12g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 12g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 7mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 85mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, roussanne grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 18&deg;Bx &middot; 18% juice &middot; 64 mL juice per can<br>
+      Block peak this season: 24.7&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="marsanne">
+
+  <div class="can-front" style="--c1:#DCCB7E; --c2:#28230F">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><polygon points="60,34 76,34 84,60 52,60" fill="#DCCB7E" opacity=".3"/><circle cx="36" cy="58" r="13" fill="#DCCB7E" stroke="#151020" stroke-width="4"/><ellipse cx="36" cy="58" rx="23" ry="6.5" fill="none" stroke="#151020" stroke-width="3" transform="rotate(-16 36 58)"/><circle cx="68" cy="50" r="4" fill="#151020"/><ellipse cx="68" cy="30" rx="12" ry="5" fill="#151020"/><circle cx="68" cy="25" r="5" fill="#DCCB7E" stroke="#151020" stroke-width="3"/></g></svg>
+      <h3 class="variety">Marsanne</h3>
+      <p class="punline">Is there life on Marsanne?</p>
+      <p class="kindline">White grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">12<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">18% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#DCCB7E">Marsanne</p>
+    <p class="bk-note">Honeysuckle, almond skin, quince. The soft one.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 12g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 12g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 7mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 85mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, marsanne grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 18&deg;Bx &middot; 18% juice &middot; 64 mL juice per can<br>
+      Block peak this season: 24.1&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="grenache">
+
+  <div class="can-front" style="--c1:#F2647F; --c2:#380C18">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><circle cx="38" cy="62" r="10" fill="#F2647F" stroke="#151020" stroke-width="4"/><line x1="48" y1="58" x2="56" y2="30" stroke="#151020" stroke-width="4" stroke-linecap="round"/><polygon points="56,30 78,36 56,44" fill="#fff" stroke="#151020" stroke-width="3.5"/><circle cx="26" cy="34" r="4" fill="#F2647F"/><circle cx="33" cy="34" r="4" fill="#F2647F"/><polygon points="22,36 37,36 29.5,46" fill="#F2647F"/></g></svg>
+      <h3 class="variety">Grenache</h3>
+      <p class="punline">We hold no Grenache.</p>
+      <p class="kindline">Red grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">12<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">18% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#F2647F">Grenache</p>
+    <p class="bk-note">Strawberry, raspberry, watermelon rind.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 13g</td><td class="r"><b>5%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 12g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 7mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 85mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, grenache grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 19&deg;Bx &middot; 18% juice &middot; 64 mL juice per can<br>
+      Block peak this season: 24.7&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="montepulciano">
+
+  <div class="can-front" style="--c1:#D6294C; --c2:#320710">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><circle cx="74" cy="28" r="9" fill="#fff" stroke="#151020" stroke-width="3.5"/><polygon points="16,76 44,34 64,76" fill="#D6294C" stroke="#151020" stroke-width="4" stroke-linejoin="round"/><polygon points="50,76 70,48 88,76" fill="#D6294C" opacity=".65" stroke="#151020" stroke-width="3.5" stroke-linejoin="round"/><polygon points="38,43 44,34 50,43" fill="#fff"/></g></svg>
+      <h3 class="variety">Montepulciano</h3>
+      <p class="punline">The full Monte.</p>
+      <p class="kindline">Red grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">13<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">20% juice &middot; 55 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#D6294C">Montepulciano</p>
+    <p class="bk-note">Juicy black cherry and plum. No grip at all.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">55</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 14g</td><td class="r"><b>5%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 13g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 8mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 90mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, montepulciano grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 18&deg;Bx &middot; 20% juice &middot; 71 mL juice per can<br>
+      Block peak this season: 22.1&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="merlot">
+
+  <div class="can-front" style="--c1:#BE2C4A; --c2:#2E060F">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><g stroke="#151020" stroke-width="4" stroke-linecap="round"><line x1="22" y1="30" x2="22" y2="76"/><line x1="78" y1="30" x2="78" y2="76"/><line x1="22" y1="34" x2="78" y2="34"/></g><circle cx="52" cy="56" r="10" fill="#BE2C4A" stroke="#151020" stroke-width="4"/><g stroke="#151020" stroke-width="3.5" stroke-linecap="round"><line x1="44" y1="50" x2="32" y2="42"/><line x1="46" y1="64" x2="38" y2="76"/><line x1="58" y1="64" x2="64" y2="76"/></g></g></svg>
+      <h3 class="variety">Merlot</h3>
+      <p class="punline">How Merlot can you go?</p>
+      <p class="kindline">Red grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">11<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">17% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#BE2C4A">Merlot</p>
+    <p class="bk-note">Plum, black cherry, round and easy.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 12g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 11g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 7mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 80mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, merlot grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 19&deg;Bx &middot; 17% juice &middot; 60 mL juice per can<br>
+      Block peak this season: 25.1&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="malbec">
+
+  <div class="can-front" style="--c1:#9333CC; --c2:#22083A">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><polygon points="28,20 40,20 54,76 16,76" fill="#9333CC" opacity=".28"/><polygon points="60,20 72,20 84,76 46,76" fill="#9333CC" opacity=".28"/><line x1="14" y1="76" x2="86" y2="76" stroke="#151020" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="64" r="10" fill="#9333CC" stroke="#151020" stroke-width="4"/><g fill="#151020"><circle cx="30" cy="22" r="2.5"/><circle cx="42" cy="18" r="2.5"/><circle cx="54" cy="16" r="2.5"/><circle cx="66" cy="18" r="2.5"/><circle cx="76" cy="22" r="2.5"/></g></g></svg>
+      <h3 class="variety">Malbec</h3>
+      <p class="punline">Malbec by popular demand.</p>
+      <p class="kindline">Red grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">11<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">17% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#9333CC">Malbec</p>
+    <p class="bk-note">Blueberry, plum skin, violet. The ink.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 12g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 11g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 7mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 80mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, malbec grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 19&deg;Bx &middot; 17% juice &middot; 60 mL juice per can<br>
+      Block peak this season: 24.5*&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="syrah">
+
+  <div class="can-front" style="--c1:#8226C4; --c2:#1E0632">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><g stroke="#151020" stroke-width="4" stroke-linecap="round"><line x1="18" y1="34" x2="18" y2="74"/><line x1="82" y1="34" x2="82" y2="74"/></g><path d="M18 38 Q50 68 82 38" fill="none" stroke="#151020" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="52" r="9" fill="#8226C4" stroke="#151020" stroke-width="4"/><g stroke="#151020" stroke-width="3" stroke-linecap="round"><line x1="66" y1="20" x2="66" y2="30"/><line x1="66" y1="20" x2="72" y2="22"/></g><circle cx="63" cy="31" r="3.5" fill="#151020"/></g></svg>
+      <h3 class="variety">Syrah</h3>
+      <p class="punline">Que Syrah, Syrah.</p>
+      <p class="kindline">Red grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">11<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">17% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#8226C4">Syrah</p>
+    <p class="bk-note">Blackberry and cracked black pepper.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 12g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 11g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 7mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 80mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, syrah grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 19&deg;Bx &middot; 17% juice &middot; 60 mL juice per can<br>
+      Block peak this season: 24.0*&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="cabernet-franc">
+
+  <div class="can-front" style="--c1:#CC3E70; --c2:#300A1A">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><rect x="20" y="26" width="60" height="34" rx="9" fill="#fff" stroke="#151020" stroke-width="4"/><polygon points="38,58 52,58 34,76" fill="#fff" stroke="#151020" stroke-width="3.5"/><text x="50" y="49" text-anchor="middle" font-family="Courier New" font-size="13" font-weight="bold" fill="#151020">GRAPES.</text></g></svg>
+      <h3 class="variety">Cabernet Franc</h3>
+      <p class="punline">Let's be Franc.</p>
+      <p class="kindline">Red grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">12<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">18% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#CC3E70">Cabernet Franc</p>
+    <p class="bk-note">Raspberry, bell pepper, leafy and sharp.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 12g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 12g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 7mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 85mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, cabernet franc grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 18&deg;Bx &middot; 18% juice &middot; 64 mL juice per can<br>
+      Block peak this season: 24.2&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="cabernet-sauvignon">
+
+  <div class="can-front" style="--c1:#7A31AE; --c2:#1C0730">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><rect x="42" y="20" width="16" height="9" rx="2" fill="#fff" stroke="#151020" stroke-width="3"/><rect x="32" y="30" width="36" height="16" rx="6" fill="#7A31AE" stroke="#151020" stroke-width="4"/><rect x="22" y="44" width="56" height="18" rx="6" fill="#7A31AE" stroke="#151020" stroke-width="4"/><rect x="27" y="47" width="6" height="5" fill="#151020"/><rect x="33" y="52" width="6" height="5" fill="#fff"/><rect x="39" y="47" width="6" height="5" fill="#151020"/><rect x="45" y="52" width="6" height="5" fill="#fff"/><rect x="51" y="47" width="6" height="5" fill="#151020"/><rect x="57" y="52" width="6" height="5" fill="#fff"/><rect x="63" y="47" width="6" height="5" fill="#151020"/><rect x="69" y="52" width="6" height="5" fill="#fff"/><circle cx="36" cy="64" r="7" fill="#151020"/><circle cx="36" cy="64" r="2.5" fill="#fff"/><circle cx="64" cy="64" r="7" fill="#151020"/><circle cx="64" cy="64" r="2.5" fill="#fff"/></g></svg>
+      <h3 class="variety">Cabernet Sauvignon</h3>
+      <p class="punline">Hail a Cab.</p>
+      <p class="kindline">Red grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">12<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">19% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#7A31AE">Cabernet Sauvignon</p>
+    <p class="bk-note">Blackcurrant and green pyrazine. Twelve blocks of it.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 13g</td><td class="r"><b>5%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 12g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 7mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 90mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, cabernet sauvignon grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 18&deg;Bx &middot; 19% juice &middot; 67 mL juice per can<br>
+      Block peak this season: 25.0&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="petit-verdot">
+
+  <div class="can-front" style="--c1:#7B3FD4; --c2:#180634">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><line x1="24" y1="44" x2="76" y2="44" stroke="#151020" stroke-width="4" stroke-linecap="round"/><circle cx="24" cy="44" r="9" fill="#151020"/><circle cx="76" cy="44" r="9" fill="#151020"/><circle cx="24" cy="44" r="4" fill="#7B3FD4"/><circle cx="76" cy="44" r="4" fill="#7B3FD4"/><circle cx="50" cy="62" r="7" fill="#7B3FD4" stroke="#151020" stroke-width="4"/><g stroke="#151020" stroke-width="3.5" stroke-linecap="round"><line x1="45" y1="57" x2="41" y2="47"/><line x1="55" y1="57" x2="59" y2="47"/></g><circle cx="62" cy="68" r="2" fill="#7B3FD4"/><circle cx="66" cy="74" r="1.6" fill="#7B3FD4"/></g></svg>
+      <h3 class="variety">Petit Verdot</h3>
+      <p class="punline">Sweat the Petit stuff.</p>
+      <p class="kindline">Red grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">12<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">20% juice &middot; 50 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#7B3FD4">Petit Verdot</p>
+    <p class="bk-note">Violet, blueberry, ink. The blackest juice here.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">50</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 13g</td><td class="r"><b>5%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 12g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 8mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 90mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, petit verdot grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 17&deg;Bx &middot; 20% juice &middot; 71 mL juice per can<br>
+      Block peak this season: 22.0&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="mourvedre">
+
+  <div class="can-front" style="--c1:#6A44A8; --c2:#150628">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><circle cx="32" cy="60" r="9" fill="#6A44A8" stroke="#151020" stroke-width="4"/><circle cx="50" cy="54" r="9" fill="#6A44A8" stroke="#151020" stroke-width="4"/><circle cx="68" cy="60" r="9" fill="#6A44A8" stroke="#151020" stroke-width="4"/><polygon points="26,52 38,52 32,38" fill="#151020"/><polygon points="44,46 56,46 50,32" fill="#fff" stroke="#151020" stroke-width="3"/><polygon points="62,52 74,52 68,38" fill="#151020"/><g fill="#151020"><circle cx="24" cy="28" r="2"/><circle cx="80" cy="30" r="2"/><circle cx="58" cy="22" r="2"/><circle cx="38" cy="24" r="2"/><circle cx="76" cy="46" r="2"/></g></g></svg>
+      <h3 class="variety">Mourvèdre</h3>
+      <p class="punline">The Mourvèdre, the merrier.</p>
+      <p class="kindline">Red grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">11<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">16% juice &middot; 45 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#6A44A8">Mourvèdre</p>
+    <p class="bk-note">Earthy, gamey, plum skin. Ripens last.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">45</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 12g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 11g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 6mg</td><td class="r">0%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 75mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, mourvèdre grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 19&deg;Bx &middot; 16% juice &middot; 57 mL juice per can<br>
+      Block peak this season: 24.8&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="tannat">
+
+  <div class="can-front" style="--c1:#5E3AA0; --c2:#120524">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><ellipse cx="50" cy="80" rx="26" ry="4.5" fill="#151020" opacity=".14"/><circle cx="40" cy="54" r="11" fill="#5E3AA0" stroke="#151020" stroke-width="4"/><line x1="50" y1="58" x2="62" y2="50" stroke="#151020" stroke-width="3.5" stroke-linecap="round"/><circle cx="68" cy="44" r="8.5" fill="#fff" stroke="#151020" stroke-width="3.5"/><rect x="63.5" y="51" width="9" height="5.5" rx="2" fill="#fff" stroke="#151020" stroke-width="3"/><circle cx="65" cy="43" r="1.8" fill="#151020"/><circle cx="71" cy="43" r="1.8" fill="#151020"/></g></svg>
+      <h3 class="variety">Tannat</h3>
+      <p class="punline">To be or Tannat to be?</p>
+      <p class="kindline">Red grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">10<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">15% juice &middot; 45 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#5E3AA0">Tannat</p>
+    <p class="bk-note">Dense blackberry and graphite. Handle with care.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">45</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 2mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 11g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 10g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 6mg</td><td class="r">0%</td></tr>
+      <tr><td>Iron 0.1mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 70mg</td><td class="r">1%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, tannat grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 19&deg;Bx &middot; 15% juice &middot; 53 mL juice per can<br>
+      Block peak this season: 25.0&deg;Bx</p>
+  </div>
+</article>
+<article class="pair" id="green-harvest">
+
+  <div class="can-front" style="--c1:#A9DC33; --c2:#16220A">
+    <div class="can-top"></div>
+    <div class="can-body">
+      <p class="brand">Moody Creek</p>
+      <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><circle cx="53" cy="55" r="45" fill="rgba(8,4,14,.38)"/><circle cx="50" cy="50" r="45" fill="#FFF7EE"/><g transform="rotate(-4 50 50)"><line x1="20" y1="70" x2="80" y2="70" stroke="#151020" stroke-width="4" stroke-linecap="round"/><circle cx="44" cy="64" r="6.5" fill="#A9DC33" stroke="#151020" stroke-width="3.5"/><circle cx="55" cy="64" r="6.5" fill="#A9DC33" stroke="#151020" stroke-width="3.5"/><circle cx="49.5" cy="55" r="6.5" fill="#A9DC33" stroke="#151020" stroke-width="3.5"/><line x1="49.5" y1="48" x2="52" y2="42" stroke="#151020" stroke-width="3" stroke-linecap="round"/><ellipse cx="50" cy="32" rx="11" ry="3.5" fill="none" stroke="#E8C25A" stroke-width="3.5"/></g></svg>
+      <h3 class="variety">Green Harvest</h3>
+      <p class="punline">Picked too soon. On purpose.</p>
+      <p class="kindline">Green harvest grape &middot; Sparkling</p>
+      <div class="bigstat">
+        <span class="num">9<span class="unit">g</span></span>
+        <span class="lbl">sugar<br>per can</span>
+      </div>
+      <ul class="flags">
+        <li>0g added sugar</li><li>0mg caffeine</li><li>2 ingredients</li>
+      </ul>
+      <p class="footline">24% juice &middot; 40 cal &middot; 12 FL OZ (355 mL)</p>
+    </div>
+    <div class="can-bot"></div>
+  </div>
+
+  <div class="can-back">
+    <p class="bk-name" style="color:#A9DC33">Green Harvest</p>
+    <p class="bk-note">Unripe fruit picked in July. Wildly tart, barely sweet.</p>
+    <table class="nf">
+      <caption>Nutrition Facts</caption>
+      <tr class="srv"><td colspan="2">1 serving per container</td></tr>
+      <tr class="srv bold"><td>Serving size</td><td class="r">1 can (355 mL)</td></tr>
+      <tr class="bar"><td colspan="2"></td></tr>
+      <tr class="cal"><td>Calories</td><td class="r">40</td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr class="dv"><td colspan="2" class="r">% Daily Value*</td></tr>
+      <tr><td><b>Total Fat</b> 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Saturated Fat 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td><i>Trans</i> Fat 0g</td><td class="r"></td></tr>
+      <tr><td><b>Cholesterol</b> 0mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Sodium</b> 3mg</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Total Carbohydrate</b> 10g</td><td class="r"><b>4%</b></td></tr>
+      <tr class="in"><td>Dietary Fiber 0g</td><td class="r"><b>0%</b></td></tr>
+      <tr class="in"><td>Total Sugars 9g</td><td class="r"></td></tr>
+      <tr class="in2"><td>Includes 0g Added Sugars</td><td class="r"><b>0%</b></td></tr>
+      <tr><td><b>Protein</b> 0g</td><td class="r"></td></tr>
+      <tr class="rule"><td colspan="2"></td></tr>
+      <tr><td>Vitamin D 0mcg</td><td class="r">0%</td></tr>
+      <tr><td>Calcium 9mg</td><td class="r">1%</td></tr>
+      <tr><td>Iron 0.2mg</td><td class="r">1%</td></tr>
+      <tr><td>Potassium 110mg</td><td class="r">2%</td></tr>
+      <tr class="thin"><td colspan="2"></td></tr>
+      <tr class="fine"><td colspan="2">* The % Daily Value (DV) tells you how much a nutrient in a
+        serving of food contributes to a daily diet. 2,000 calories a day is used for general
+        nutrition advice.</td></tr>
+    </table>
+    <p class="ingr"><b>Ingredients:</b> Water, green harvest grape juice, carbon dioxide.</p>
+    <p class="bk-spec">Pressed at 11&deg;Bx &middot; 24% juice &middot; 85 mL juice per can<br>
+      Block peak this season: —&deg;Bx</p>
+  </div>
+</article>
+</main>
+
+<section class="method">
+  <div class="wrap">
+    <h2>Where these numbers came from</h2>
+    <div class="cols">
+      <div>
+        <p><b>They are estimates, and they are not label-legal.</b> Nothing here has been pressed,
+          pasteurized or sent to a lab. Before a single can is printed, every figure has to be
+          replaced with results from an accredited food-testing laboratory — that is a legal
+          requirement, not a formality.</p>
+        <p>What these are is a <i>defensible model</i>: good enough to formulate against, price
+          against, and show a co-packer.</p>
+        <p class="warn">Sugar is computed straight from the vineyard's own Brix board. Degrees Brix
+          is very close to grams of sugar per 100 mL in grape juice, so
+          <code>sugar = 355 mL &times; juice% &times; Brix/100</code> is a sound first estimate.</p>
+      </div>
+      <div>
+        <p><b>Why the juice percentages look the way they do.</b> Ripe wine grapes here run
+          22&ndash;25&nbsp;Brix — gloriously sweet. To land a light, crisp can we pick <b>earlier
+          fruit</b>: at 17&ndash;19&nbsp;Brix the same variety brings all its flavor with more acid
+          and less sugar, so every can stays in the 9&ndash;13g range without diluting the taste away.</p>
+        <p>Micronutrients use USDA reference values for grape juice, scaled to the juice actually in
+          the can. Grape juice is a genuinely useful source of potassium, and that carries straight
+          through to the panel — the numbers printed here are simply what the grapes bring.</p>
+        <p>Protein, fat and fiber round to zero at these juice volumes. That's honest, and it's
+          also why this is a <i>drink</i>, not a food.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p class="disclaim">
+    Concept work for a beverage that does not exist. Nutrition figures are calculated estimates
+    from a formulation model, not laboratory analysis, and must not be used on packaging.
+    &ldquo;0g Added Sugars&rdquo; reflects the intended formulation (no sweetener of any kind);
+    total sugars are naturally occurring in grape juice. No health claim is made or implied.
+    Generated by <code>build-labels.py</code>; do not hand-edit.
+  </p>
+</footer>
+<!--/ARTIFACT-->
+</body>
+</html>
