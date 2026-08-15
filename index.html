@@ -323,6 +323,18 @@ section { padding-block: clamp(4rem, 11vw, 8.5rem); }
   padding-top: .7rem; border-top: 1px solid rgba(255,255,255,.22); opacity: .88;
 }
 
+/* Regular / Light mood chips — tap the card to flip the can */
+.can .moods { display: flex; gap: .5rem; position: relative;
+  padding-top: .7rem; border-top: 1px solid rgba(255,255,255,.22); }
+.chip {
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .28rem .7rem; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.55); color: #F6F1F8; opacity: .55;
+}
+.chip.on { opacity: 1; }
+.chip.reg.on { background: var(--verjus); border-color: var(--verjus); color: #141C06; }
+.chip.lgt.on { background: #7FA9E6; border-color: #7FA9E6; color: #0E1A2E; }
+
 /* can render fills the card; text rides a scrim above it */
 .can .render { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
 .can .scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(6,3,10,.55) 68%, rgba(6,3,10,.92) 100%); }
@@ -438,7 +450,7 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
     <p class="eyebrow rise">Pre-launch &nbsp;·&nbsp; First drop at green harvest</p>
     <h1 class="wordmark rise"><span>Moody</span><span class="b">Creek</span></h1>
     <p class="nature rise">Moody by Nature.</p>
-    <p class="hero-lede rise">Fourteen wine grapes. Pressed loud, poured cold, zero caffeine. All mood.</p>
+    <p class="hero-lede rise">Fifteen grapes. Two moods. Pressed loud, poured cold, zero caffeine.</p>
     <div class="hero-foot rise">
       <p class="eyebrow">Grapes &amp; bubbles. Nothing else.</p>
       <p class="eyebrow">Caffeine-free</p>
@@ -447,7 +459,7 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
   </div>
 </header>
 
-<div class="ticker" aria-hidden="true"><span>Moody drinks. &nbsp;·&nbsp; Zero caffeine. &nbsp;·&nbsp; All mood. &nbsp;·&nbsp; Fourteen grapes. &nbsp;·&nbsp; Grapes &amp; bubbles. Nothing else. &nbsp;·&nbsp; Moody by Nature. &nbsp;·&nbsp; No added sugar. No added anything. &nbsp;·&nbsp; Moody drinks. &nbsp;·&nbsp; Zero caffeine. &nbsp;·&nbsp; All mood. &nbsp;·&nbsp; Fourteen grapes. &nbsp;·&nbsp; Grapes &amp; bubbles. Nothing else. &nbsp;·&nbsp; Moody by Nature. &nbsp;·&nbsp; No added sugar. No added anything. &nbsp;·&nbsp; </span></div>
+<div class="ticker" aria-hidden="true"><span>Moody drinks. &nbsp;·&nbsp; Zero caffeine. &nbsp;·&nbsp; All mood. &nbsp;·&nbsp; Fifteen grapes. Two moods. &nbsp;·&nbsp; Grapes &amp; bubbles. Nothing else. &nbsp;·&nbsp; Moody by Nature. &nbsp;·&nbsp; No added sugar. No added anything. &nbsp;·&nbsp; Moody drinks. &nbsp;·&nbsp; Zero caffeine. &nbsp;·&nbsp; All mood. &nbsp;·&nbsp; Fifteen grapes. Two moods. &nbsp;·&nbsp; Grapes &amp; bubbles. Nothing else. &nbsp;·&nbsp; Moody by Nature. &nbsp;·&nbsp; No added sugar. No added anything. &nbsp;·&nbsp; </span></div>
 
 <!-- ======================= TWO INGREDIENTS ======================= -->
 <section class="ingredients">
@@ -478,12 +490,13 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
     <h2 class="reveal">Real grapes.<br>A fraction of<br>the sugar.</h2>
     <p class="narrow reveal">Every gram of sugar in a Moody Creek walked in attached to a wine grape. We press whole clusters and cut the juice with bubbles — the whole flavor of the vineyard, at about a third the sugar of the loud cans.</p>
 
-    <div class="chart reveal" role="img" aria-label="Sugar per 12 ounce serving: Mountain Dew 46 grams, energy drink 40, Coca-Cola 39, sports drink 21, Moody Creek 12, Moody Creek Green Harvest 7.">
+    <div class="chart reveal" role="img" aria-label="Sugar per 12 ounce serving: Mountain Dew 46 grams, energy drink 40, Coca-Cola 39, sports drink 21, Moody Creek 12, Moody Creek Light 6, Green Harvest 7.">
       <div class="row"><span class="name">Mountain Dew</span><span class="track"><span class="bar" style="--w:100%"></span></span><span class="val">46g</span></div>
       <div class="row"><span class="name">Energy drink</span><span class="track"><span class="bar" style="--w:87%"></span></span><span class="val">40g</span></div>
       <div class="row"><span class="name">Coca-Cola</span><span class="track"><span class="bar" style="--w:85%"></span></span><span class="val">39g</span></div>
       <div class="row"><span class="name">Sports drink</span><span class="track"><span class="bar" style="--w:46%"></span></span><span class="val">21g</span></div>
       <div class="row us"><span class="name">Moody Creek</span><span class="track"><span class="bar" style="--w:26%"></span></span><span class="val">12g</span></div>
+      <div class="row us"><span class="name">Moody Creek Light</span><span class="track"><span class="bar" style="--w:13%"></span></span><span class="val">6g</span></div>
       <div class="row us"><span class="name">Green Harvest</span><span class="track"><span class="bar" style="--w:15%"></span></span><span class="val">7g</span></div>
     </div>
 
@@ -495,159 +508,159 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
 <section style="padding-bottom:clamp(2rem,6vw,4rem)">
   <div class="wrap stack">
     <p class="eyebrow reveal">The lineup &nbsp;·&nbsp; scroll →</p>
-    <h2 class="reveal">Fourteen grapes.<br>Never the same<br>can twice.</h2>
+    <h2 class="reveal">Fifteen grapes.<br>Two moods.</h2>
   </div>
 
   <div class="rail reveal">
 
     <article class="can" style="--c1:#C9E04A; --c2:#1E2A0A">
-      <img class="render" src="media/cans/01-sauvignon-blanc.jpg" alt="Sauvignon Blanc can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/01-sauvignon-blanc-regular.jpg" data-regular="media/cans/01-sauvignon-blanc-regular.jpg" data-light="media/cans/01-sauvignon-blanc-light.jpg" alt="Sauvignon Blanc can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 001 · Sep</p>
       <h3 class="nm">Sauvignon Blanc</h3>
       <p class="var">My mind's gone Blanc.</p>
       <p class="note">Water-white and razor-crisp. Cut grass, lime pith, gooseberry.</p>
-      <p class="spec"><span>17% juice</span><span>11g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#E8C25A; --c2:#2A1F06">
-      <img class="render" src="media/cans/02-semillon.jpg" alt="Semillon can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/02-semillon-regular.jpg" data-regular="media/cans/02-semillon-regular.jpg" data-light="media/cans/02-semillon-light.jpg" alt="Semillon can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 002 · Sep</p>
       <h3 class="nm">Sémillon</h3>
       <p class="var">Once in Sémillon.</p>
       <p class="note">Fig, beeswax, yellow apple. The grape nobody knew we had.</p>
-      <p class="spec"><span>18% juice</span><span>12g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#E5B94F; --c2:#2A1D08">
-      <img class="render" src="media/cans/03-roussanne.jpg" alt="Roussanne can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/03-roussanne-regular.jpg" data-regular="media/cans/03-roussanne-regular.jpg" data-light="media/cans/03-roussanne-light.jpg" alt="Roussanne can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 003 · Oct</p>
       <h3 class="nm">Roussanne</h3>
       <p class="var">Roussanne shine, sleepyhead.</p>
       <p class="note">Pear, herbal tea, white flowers, a little honey.</p>
-      <p class="spec"><span>18% juice</span><span>12g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#DCCB7E; --c2:#28230F">
-      <img class="render" src="media/cans/04-marsanne.jpg" alt="Marsanne can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/04-marsanne-regular.jpg" data-regular="media/cans/04-marsanne-regular.jpg" data-light="media/cans/04-marsanne-light.jpg" alt="Marsanne can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 004 · Oct</p>
       <h3 class="nm">Marsanne</h3>
       <p class="var">Is there life on Marsanne?</p>
       <p class="note">Honeysuckle, almond skin, quince. The soft-spoken one.</p>
-      <p class="spec"><span>18% juice</span><span>12g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#F2647F; --c2:#380C18">
-      <img class="render" src="media/cans/05-grenache.jpg" alt="Grenache can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/05-grenache-regular.jpg" data-regular="media/cans/05-grenache-regular.jpg" data-light="media/cans/05-grenache-light.jpg" alt="Grenache can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 005 · Sep</p>
       <h3 class="nm">Grenache</h3>
       <p class="var">We hold no Grenache.</p>
       <p class="note">Strawberry, raspberry, watermelon rind. Sunset pink.</p>
-      <p class="spec"><span>18% juice</span><span>12g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#D6294C; --c2:#320710">
-      <img class="render" src="media/cans/06-montepulciano.jpg" alt="Montepulciano can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/06-montepulciano-regular.jpg" data-regular="media/cans/06-montepulciano-regular.jpg" data-light="media/cans/06-montepulciano-light.jpg" alt="Montepulciano can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 006 · Oct</p>
       <h3 class="nm">Montepulciano</h3>
       <p class="var">The full Monte.</p>
       <p class="note">Juicy black cherry and plum. Zero grip, all glug.</p>
-      <p class="spec"><span>20% juice</span><span>13g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#BE2C4A; --c2:#2E060F">
-      <img class="render" src="media/cans/07-merlot.jpg" alt="Merlot can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/07-merlot-regular.jpg" data-regular="media/cans/07-merlot-regular.jpg" data-light="media/cans/07-merlot-light.jpg" alt="Merlot can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 007 · Oct</p>
       <h3 class="nm">Merlot</h3>
       <p class="var">How Merlot can you go?</p>
       <p class="note">Plum and black cherry, round and easy. Limbo champion.</p>
-      <p class="spec"><span>17% juice</span><span>11g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#9333CC; --c2:#22083A">
-      <img class="render" src="media/cans/08-malbec.jpg" alt="Malbec can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/08-malbec-regular.jpg" data-regular="media/cans/08-malbec-regular.jpg" data-light="media/cans/08-malbec-light.jpg" alt="Malbec can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 008 · Oct</p>
       <h3 class="nm">Malbec</h3>
       <p class="var">Malbec by popular demand.</p>
       <p class="note">Blueberry, plum skin, violet. The inkiest juice on the hill.</p>
-      <p class="spec"><span>17% juice</span><span>11g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#8226C4; --c2:#1E0632">
-      <img class="render" src="media/cans/09-syrah.jpg" alt="Syrah can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/09-syrah-regular.jpg" data-regular="media/cans/09-syrah-regular.jpg" data-light="media/cans/09-syrah-light.jpg" alt="Syrah can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 009 · Oct</p>
       <h3 class="nm">Syrah</h3>
       <p class="var">Que Syrah, Syrah.</p>
       <p class="note">Blackberry and cracked black pepper. Whatever will be, will be purple.</p>
-      <p class="spec"><span>17% juice</span><span>11g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#CC3E70; --c2:#300A1A">
-      <img class="render" src="media/cans/10-cabernet-franc.jpg" alt="Cabernet Franc can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/10-cabernet-franc-regular.jpg" data-regular="media/cans/10-cabernet-franc-regular.jpg" data-light="media/cans/10-cabernet-franc-light.jpg" alt="Cabernet Franc can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 010 · Sep</p>
       <h3 class="nm">Cabernet Franc</h3>
       <p class="var">Let's be Franc.</p>
       <p class="note">Raspberry, bell pepper, leafy and sharp. Honestly.</p>
-      <p class="spec"><span>18% juice</span><span>12g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#7A31AE; --c2:#1C0730">
-      <img class="render" src="media/cans/11-cabernet-sauvignon.jpg" alt="Cabernet Sauvignon can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/11-cabernet-sauvignon-regular.jpg" data-regular="media/cans/11-cabernet-sauvignon-regular.jpg" data-light="media/cans/11-cabernet-sauvignon-light.jpg" alt="Cabernet Sauvignon can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 011 · Oct</p>
       <h3 class="nm">Cabernet<br>Sauvignon</h3>
       <p class="var">Hail a Cab.</p>
       <p class="note">Blackcurrant with a green streak. Twelve blocks deep.</p>
-      <p class="spec"><span>19% juice</span><span>12g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#7B3FD4; --c2:#180634">
-      <img class="render" src="media/cans/12-petit-verdot.jpg" alt="Petit Verdot can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/12-petit-verdot-regular.jpg" data-regular="media/cans/12-petit-verdot-regular.jpg" data-light="media/cans/12-petit-verdot-light.jpg" alt="Petit Verdot can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 012 · Oct</p>
       <h3 class="nm">Petit Verdot</h3>
       <p class="var">Sweat the Petit stuff.</p>
       <p class="note">Violet, blueberry, ink. Small name, blackest can.</p>
-      <p class="spec"><span>20% juice</span><span>12g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#6A44A8; --c2:#150628">
-      <img class="render" src="media/cans/13-mourvedre.jpg" alt="Mourvedre can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/13-mourvedre-regular.jpg" data-regular="media/cans/13-mourvedre-regular.jpg" data-light="media/cans/13-mourvedre-light.jpg" alt="Mourvedre can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 013 · Oct</p>
       <h3 class="nm">Mourvèdre</h3>
       <p class="var">The Mourvèdre, the merrier.</p>
       <p class="note">Earthy, gamey, plum skin. Last grape off the hill every year.</p>
-      <p class="spec"><span>16% juice</span><span>11g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#5E3AA0; --c2:#120524">
-      <img class="render" src="media/cans/14-tannat.jpg" alt="Tannat can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/14-tannat-regular.jpg" data-regular="media/cans/14-tannat-regular.jpg" data-light="media/cans/14-tannat-light.jpg" alt="Tannat can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 014 · Oct</p>
       <h3 class="nm">Tannat</h3>
       <p class="var">To be or Tannat to be?</p>
       <p class="note">Dense blackberry and graphite. That is the question.</p>
-      <p class="spec"><span>15% juice</span><span>10g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
 
     <article class="can" style="--c1:#A9DC33; --c2:#17230A">
-      <img class="render" src="media/cans/15-green-harvest.jpg" alt="Green Harvest can" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/15-green-harvest-regular.jpg" data-regular="media/cans/15-green-harvest-regular.jpg" data-light="media/cans/15-green-harvest-light.jpg" alt="Green Harvest can" loading="lazy" decoding="async">
       <div class="scrim" aria-hidden="true"></div>
       <p class="lot">Lot 015 · Jul</p>
       <h3 class="nm">Green<br>Harvest</h3>
       <p class="var">Picked too soon. On purpose.</p>
       <p class="note">Unripe fruit rescued off the ground in July. Wildly tart, barely sweet.</p>
-      <p class="spec"><span>24% juice</span><span>7g sugar</span></p>
+      <p class="moods"><span class="chip reg on">Regular</span><span class="chip lgt">Light</span></p>
     </article>
   </div>
 </section>
@@ -756,6 +769,18 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
     reel.autoplay = false;
     reel.pause();
   }
+
+  // Lineup cards flip between Regular and Light on tap.
+  document.querySelectorAll(".can .render[data-light]").forEach(function (img) {
+    var card = img.closest(".can");
+    card.style.cursor = "pointer";
+    card.addEventListener("click", function () {
+      var toLight = img.getAttribute("src") === img.getAttribute("data-regular");
+      img.setAttribute("src", img.getAttribute(toLight ? "data-light" : "data-regular"));
+      card.querySelector(".chip.reg").classList.toggle("on", !toLight);
+      card.querySelector(".chip.lgt").classList.toggle("on", toLight);
+    });
+  });
 
   // Sign-up form. No backend wired — swap this handler for your provider's endpoint.
   var form = document.getElementById("drop-form");
