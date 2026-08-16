@@ -295,15 +295,12 @@ section { padding-block: clamp(4rem, 11vw, 8.5rem); }
 }
 .can {
   scroll-snap-align: center;
-  flex: 0 0 clamp(15rem, 68vw, 19rem);
-  min-height: 25rem;
-  display: flex; flex-direction: column; justify-content: flex-end; gap: .7rem;
-  padding: 1.5rem;
+  flex: 0 0 clamp(12rem, 55vw, 17rem);
+  display: flex; flex-direction: column; gap: .7rem;
+  padding: .9rem .9rem 1rem;
   border-radius: 9px;
-  /* cans keep their own dark ground in either theme — they're objects, not surfaces */
-  background:
-    linear-gradient(175deg, transparent 38%, rgba(6,3,10,.86) 100%),
-    linear-gradient(150deg, var(--c1), var(--c2));
+  /* flat near-navy matches the ground baked into the can renders */
+  background: #0B101E;
   color: #F6F1F8;
   box-shadow: var(--shadow);
   position: relative; overflow: hidden;
@@ -335,8 +332,8 @@ section { padding-block: clamp(4rem, 11vw, 8.5rem); }
 .chip.lgt.on { background: #7FA9E6; border-color: #7FA9E6; color: #0E1A2E; }
 
 /* can render fills the card; text rides a scrim above it */
-.can .render { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
-.can .scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 68%, rgba(6,3,10,.72) 100%); }
+.can .render { display: block; width: 100%; height: auto; border-radius: 5px; }
+.can .scrim { display: none; }
 .can > p, .can > h3 { position: relative; }
 .can .nm { font-size: clamp(1.5rem, 4.5vw, 1.9rem); }
 .can .note { display: none; }
