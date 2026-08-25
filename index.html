@@ -286,18 +286,22 @@ section { padding-block: clamp(4rem, 11vw, 8.5rem); }
 .footnote { font-family: var(--mono); font-size: .72rem; line-height: 1.7; color: var(--muted); letter-spacing: .02em; }
 
 /* ========================== THE LINEUP ========================== */
+/* four cans per row = two varieties, each in Regular and Light; the rest scroll down */
 .rail {
-  display: flex; gap: 1rem;
-  overflow-x: auto; scroll-snap-type: x mandatory;
-  padding: clamp(1.5rem,4vw,2.5rem) var(--pad) 1.5rem;
-  margin-inline: calc(50% - 50vw);
-  scrollbar-width: thin;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(.6rem, 1.5vw, 1.1rem);
+  width: min(100% - calc(var(--pad) * 2), 1180px);
+  margin-inline: auto;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+/* on a phone, two per row keeps each variety's pair side by side */
+@media (max-width: 720px) {
+  .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .can {
-  scroll-snap-align: center;
-  flex: 0 0 clamp(12rem, 55vw, 17rem);
   display: flex; flex-direction: column; gap: .7rem;
-  padding: .9rem .9rem 1rem;
+  padding: .7rem .7rem .8rem;
   border-radius: 9px;
   /* flat near-navy matches the ground baked into the can renders */
   background: #0B101E;
@@ -503,7 +507,7 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
 <!-- ========================== THE LINEUP ========================== -->
 <section style="padding-bottom:clamp(2rem,6vw,4rem)">
   <div class="wrap stack">
-    <p class="eyebrow reveal">The lineup &nbsp;·&nbsp; scroll →</p>
+    <p class="eyebrow reveal">The lineup &nbsp;·&nbsp; 15 grapes &nbsp;·&nbsp; 30 cans</p>
     <h2 class="reveal">Fifteen grapes.<br>Two moods.</h2>
   </div>
 
