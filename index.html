@@ -213,6 +213,28 @@ section { padding-block: clamp(4rem, 11vw, 8.5rem); }
 .rise:nth-child(5) { animation-delay: .60s; }
 @keyframes rise { to { opacity: 1; transform: none; } }
 
+/* ===================== FLAVOR OF THE SEASON ===================== */
+/* keeps its own dark ground in both themes, like the hero — it's a spotlight, not a surface */
+.season {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: #0B101E;
+  --text: #F3EDF7; --muted: #C6B7D1;
+  color: var(--text);
+  border-bottom: 1px solid var(--line);
+}
+.season::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(55% 75% at 74% 52%, rgba(190,44,74,.42), transparent 72%);
+}
+.season-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
+@media (min-width: 820px) { .season-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); } }
+.season-pun {
+  font-family: var(--display); text-transform: uppercase; letter-spacing: .02em;
+  font-size: clamp(1.3rem, 3.6vw, 2rem); color: #F07A92;
+}
+.season-cans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.8rem, 2vw, 1.4rem); margin: 0; }
+.season-cans img { display: block; width: 100%; height: auto; border-radius: 9px; box-shadow: var(--shadow); }
+
 /* ======================= TWO INGREDIENTS ======================= */
 .ingredients { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
 .ing-grid { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3.5rem); }
@@ -460,6 +482,21 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
 </header>
 
 <div class="ticker" aria-hidden="true"><span>Moody drinks. &nbsp;·&nbsp; Zero caffeine. &nbsp;·&nbsp; All mood. &nbsp;·&nbsp; Fifteen grapes. Two moods. &nbsp;·&nbsp; Grapes &amp; bubbles. Nothing else. &nbsp;·&nbsp; Moody by Nature. &nbsp;·&nbsp; No added sugar. No added anything. &nbsp;·&nbsp; Moody drinks. &nbsp;·&nbsp; Zero caffeine. &nbsp;·&nbsp; All mood. &nbsp;·&nbsp; Fifteen grapes. Two moods. &nbsp;·&nbsp; Grapes &amp; bubbles. Nothing else. &nbsp;·&nbsp; Moody by Nature. &nbsp;·&nbsp; No added sugar. No added anything. &nbsp;·&nbsp; </span></div>
+
+<!-- ====================== FLAVOR OF THE SEASON ====================== -->
+<section class="season">
+  <div class="wrap season-grid">
+    <div class="stack reveal">
+      <p class="eyebrow">Fall 2026 &nbsp;·&nbsp; Merlot</p>
+      <h2>Flavor of<br>the season.</h2>
+      <p class="season-pun">How Merlot can you go?</p>
+    </div>
+    <div class="season-cans reveal">
+      <img src="media/season/merlot-regular.jpg" alt="Merlot — Regular" loading="lazy" decoding="async">
+      <img src="media/season/merlot-light.jpg" alt="Merlot — Light" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
 
 <!-- ======================= TWO INGREDIENTS ======================= -->
 <section class="ingredients">
