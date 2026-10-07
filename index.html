@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C0712">
 <title>Moody Creek — Grapes and Bubbles. That's It.</title>
 </head>
 <body>
@@ -66,6 +67,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+/* width/height attributes reserve space while lazy images load; CSS still decides the final size */
+img { max-width: 100%; height: auto; }
 
 body {
   margin: 0;
@@ -75,6 +78,8 @@ body {
   font-size: clamp(1rem, .96rem + .22vw, 1.125rem);
   line-height: 1.62;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   overflow-x: hidden;
 }
 
@@ -424,7 +429,7 @@ form { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.75rem; max-widt
 input[type="email"] {
   flex: 1 1 15rem; min-width: 0;
   padding: .95rem 1.1rem;
-  font-family: var(--mono); font-size: .9rem;
+  font-family: var(--mono); font-size: 1rem;
   color: var(--text); background: var(--surface-2);
   border: 1px solid var(--line); border-radius: 8px;
 }
@@ -460,12 +465,38 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
   .chart .bar { transition: none; width: var(--w); }
   button:hover { transform: none; }
 }
+/* ============================ PHONES ============================ */
+@media (max-width: 600px) {
+  /* mono labels: bigger and tighter-spaced so they stay legible at arm's length */
+  .eyebrow { font-size: .78rem; letter-spacing: .12em; }
+  .reel figcaption, .shot figcaption, .formnote { font-size: .78rem; letter-spacing: .04em; }
+  .disclaim { font-size: .76rem; }
+  .nots li { font-size: .78rem; }
+  .row .val { font-size: .9rem; }
+
+  /* hero: leave the ticker and the start of the next section in view, as a scroll cue */
+  .hero { min-height: 82svh; }
+  .hero-foot { gap: .45rem 1.4rem; }
+  .fog { display: none; }  /* the photo carries the mood; skip the GPU-heavy blur layers */
+
+  /* vineyard video: centered and capped so the section stays about one screen tall */
+  .reel { max-width: 15rem; margin-inline: auto; }
+
+  /* sugar chart: give the bars more of the row */
+  .row { grid-template-columns: minmax(7rem, 9.5rem) 1fr auto; }
+
+  /* signup button goes full width under the field, an easy thumb target */
+  form button { flex: 1 1 100%; }
+
+  section { padding-block: clamp(3.25rem, 12vw, 4.5rem); }
+}
+
 </style>
 
 <!-- ============================ HERO ============================ -->
 <header class="hero">
   <div class="hero-bg" aria-hidden="true">
-    <img src="media/hero-bin.jpg" alt="" fetchpriority="high" decoding="async">
+    <img src="media/hero-bin.jpg" width="1300" height="1303" alt="" fetchpriority="high" decoding="async">
   </div>
   <div class="fog" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="wrap stack">
@@ -492,8 +523,8 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
       <p class="season-pun">How Merlot can you go?</p>
     </div>
     <div class="season-cans reveal">
-      <img src="media/season/merlot-regular.jpg" alt="Merlot — Regular" loading="lazy" decoding="async">
-      <img src="media/season/merlot-light.jpg" alt="Merlot — Light" loading="lazy" decoding="async">
+      <img src="media/season/merlot-regular.jpg" width="284" height="600" alt="Merlot — Regular" loading="lazy" decoding="async">
+      <img src="media/season/merlot-light.jpg" width="284" height="600" alt="Merlot — Light" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -505,7 +536,7 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
       <p class="eyebrow">The ingredient list</p>
       <h2>We overthought<br>two things.</h2>
       <p class="narrow">Most drinks have a paragraph on the back. Ours has a sentence. Wine grapes give you enough flavor, color and acid on their own that you don't need to hand a chemist the rest of the job.</p>
-      <img class="cluster" src="media/vine-cluster.jpg" alt="Ripe grape clusters on the vine" loading="lazy" decoding="async">
+      <img class="cluster" src="media/vine-cluster.jpg" width="900" height="899" alt="Ripe grape clusters on the vine" loading="lazy" decoding="async">
     </div>
     <div class="reveal">
       <ul class="ing-list">
@@ -550,123 +581,123 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
 
   <div class="rail reveal">
     <article class="can">
-      <img class="render" src="media/cans/01-sauvignon-blanc-regular.jpg" alt="Sauvignon Blanc — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/01-sauvignon-blanc-regular.jpg" width="320" height="633" alt="Sauvignon Blanc — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/01-sauvignon-blanc-light.jpg" alt="Sauvignon Blanc — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/01-sauvignon-blanc-light.jpg" width="320" height="629" alt="Sauvignon Blanc — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/02-semillon-regular.jpg" alt="Sémillon — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/02-semillon-regular.jpg" width="320" height="633" alt="Sémillon — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/02-semillon-light.jpg" alt="Sémillon — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/02-semillon-light.jpg" width="320" height="629" alt="Sémillon — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/03-roussanne-regular.jpg" alt="Roussanne — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/03-roussanne-regular.jpg" width="320" height="629" alt="Roussanne — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/03-roussanne-light.jpg" alt="Roussanne — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/03-roussanne-light.jpg" width="320" height="633" alt="Roussanne — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/04-marsanne-regular.jpg" alt="Marsanne — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/04-marsanne-regular.jpg" width="320" height="629" alt="Marsanne — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/04-marsanne-light.jpg" alt="Marsanne — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/04-marsanne-light.jpg" width="320" height="633" alt="Marsanne — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/05-grenache-regular.jpg" alt="Grenache — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/05-grenache-regular.jpg" width="320" height="629" alt="Grenache — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/05-grenache-light.jpg" alt="Grenache — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/05-grenache-light.jpg" width="320" height="629" alt="Grenache — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/06-montepulciano-regular.jpg" alt="Montepulciano — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/06-montepulciano-regular.jpg" width="320" height="613" alt="Montepulciano — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/06-montepulciano-light.jpg" alt="Montepulciano — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/06-montepulciano-light.jpg" width="320" height="609" alt="Montepulciano — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/07-merlot-regular.jpg" alt="Merlot — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/07-merlot-regular.jpg" width="320" height="613" alt="Merlot — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/07-merlot-light.jpg" alt="Merlot — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/07-merlot-light.jpg" width="320" height="609" alt="Merlot — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/08-malbec-regular.jpg" alt="Malbec — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/08-malbec-regular.jpg" width="320" height="609" alt="Malbec — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/08-malbec-light.jpg" alt="Malbec — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/08-malbec-light.jpg" width="320" height="613" alt="Malbec — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/09-syrah-regular.jpg" alt="Syrah — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/09-syrah-regular.jpg" width="320" height="609" alt="Syrah — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/09-syrah-light.jpg" alt="Syrah — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/09-syrah-light.jpg" width="320" height="613" alt="Syrah — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/10-cabernet-franc-regular.jpg" alt="Cabernet Franc — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/10-cabernet-franc-regular.jpg" width="320" height="609" alt="Cabernet Franc — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/10-cabernet-franc-light.jpg" alt="Cabernet Franc — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/10-cabernet-franc-light.jpg" width="320" height="609" alt="Cabernet Franc — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/11-cabernet-sauvignon-regular.jpg" alt="Cabernet Sauvignon — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/11-cabernet-sauvignon-regular.jpg" width="320" height="554" alt="Cabernet Sauvignon — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/11-cabernet-sauvignon-light.jpg" alt="Cabernet Sauvignon — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/11-cabernet-sauvignon-light.jpg" width="320" height="550" alt="Cabernet Sauvignon — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/12-petit-verdot-regular.jpg" alt="Petit Verdot — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/12-petit-verdot-regular.jpg" width="320" height="554" alt="Petit Verdot — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/12-petit-verdot-light.jpg" alt="Petit Verdot — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/12-petit-verdot-light.jpg" width="320" height="550" alt="Petit Verdot — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/13-mourvedre-regular.jpg" alt="Mourvèdre — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/13-mourvedre-regular.jpg" width="320" height="550" alt="Mourvèdre — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/13-mourvedre-light.jpg" alt="Mourvèdre — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/13-mourvedre-light.jpg" width="320" height="554" alt="Mourvèdre — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/14-tannat-regular.jpg" alt="Tannat — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/14-tannat-regular.jpg" width="320" height="550" alt="Tannat — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/14-tannat-light.jpg" alt="Tannat — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/14-tannat-light.jpg" width="320" height="554" alt="Tannat — Light" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/15-green-harvest-regular.jpg" alt="Green Harvest — Regular" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/15-green-harvest-regular.jpg" width="320" height="550" alt="Green Harvest — Regular" loading="lazy" decoding="async">
     </article>
 
     <article class="can">
-      <img class="render" src="media/cans/15-green-harvest-light.jpg" alt="Green Harvest — Light" loading="lazy" decoding="async">
+      <img class="render" src="media/cans/15-green-harvest-light.jpg" width="320" height="550" alt="Green Harvest — Light" loading="lazy" decoding="async">
     </article>
   </div>
 </section>
@@ -679,7 +710,7 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
     <div class="field reveal">
       <figure class="reel">
         <div class="frame">
-          <video id="reel-video" poster="media/vineyard-poster.jpg" muted loop playsinline autoplay preload="metadata" controls>
+          <video id="reel-video" poster="media/vineyard-poster.jpg" width="540" height="960" muted loop playsinline preload="none" controls>
             <source src="media/vineyard.mp4" type="video/mp4">
             Your browser can't play this video.
           </video>
@@ -693,7 +724,7 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
         <p>That's the whole trick. There is no other trick.</p>
       </div>
       <figure class="shot">
-        <img src="media/harvest-bins.jpg" alt="Picking bins full of dark grapes beside a tractor in the vineyard rows" loading="lazy" decoding="async">
+        <img src="media/harvest-bins.jpg" width="1100" height="1101" alt="Picking bins full of dark grapes beside a tractor in the vineyard rows" loading="lazy" decoding="async">
         <figcaption>Bins in the rows at harvest — the same fruit, four weeks later than we want it.</figcaption>
       </figure>
     </div>
@@ -769,11 +800,16 @@ footer { border-top: 1px solid var(--line); padding-block: clamp(2.5rem,6vw,4rem
 
   // Vineyard footage: don't autoplay for anyone who asked for less motion —
   // leave the poster up and let them start it from the controls.
+  // Otherwise start it only once it scrolls into view, and pause it off-screen,
+  // so phones don't spend data and battery on a video nobody is looking at.
   var reel = document.getElementById("reel-video");
-  if (reel && reduce) {
-    reel.removeAttribute("autoplay");
-    reel.autoplay = false;
-    reel.pause();
+  if (reel && !reduce && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { var p = reel.play(); if (p && p.catch) p.catch(function () {}); }
+        else { reel.pause(); }
+      });
+    }, { threshold: 0.25 }).observe(reel);
   }
 
 
